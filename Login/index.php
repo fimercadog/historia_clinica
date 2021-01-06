@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['S_IDUSAURIO'])) {
+if (isset($_SESSION['S_IDUSUARIO'])) {
     header('Location: ../vista/index.php');
 }
 ?>
@@ -35,6 +35,7 @@ if (isset($_SESSION['S_IDUSAURIO'])) {
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" href="../Plantilla/plugins/sweetalert2/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -49,15 +50,13 @@ if (isset($_SESSION['S_IDUSAURIO'])) {
 
                 <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
                     <span class="label-input100">Usuario</span>
-                    <input class="input100" type="text" name="username" placeholder="Escribe el Usuario" id="txt_usu"
-                        autocomplete="new-password">
+                    <input class="input100" type="text" name="username" placeholder="Escribe el Usuario" id="txt_usu" autocomplete="new-password">
                     <span class="focus-input100" data-symbol="&#xf206;"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
                     <span class="label-input100">Contrase&ntilde;a</span>
-                    <input class="input100" type="password" name="pass" placeholder="Escribe la Contraseña"
-                        id="txt_con">
+                    <input class="input100" type="password" name="pass" placeholder="Escribe la Contraseña" id="txt_con">
                     <span class="focus-input100" data-symbol="&#xf190;"></span>
                 </div>
 
@@ -100,12 +99,14 @@ if (isset($_SESSION['S_IDUSAURIO'])) {
 
     <div id="dropDownSelect1"></div>
 
+
+
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="../Plantilla/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <!--===============================================================================================-->
     <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Plantilla/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!--===============================================================================================-->
     <script src="vendor/bootstrap/js/popper.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -120,10 +121,11 @@ if (isset($_SESSION['S_IDUSAURIO'])) {
     <script src="js/main.js"></script>
     <!--===============================================================================================-->
     <script src="../js/usuario.js"></script>
+    <!--===============================================================================================-->
 
 </body>
 <script>
-txt_usu.focus()
+    txt_usu.focus()
 </script>
 
 </html>

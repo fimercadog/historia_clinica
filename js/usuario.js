@@ -20,11 +20,51 @@ function VerificarUsuario() {
                 "error"
             );
         } else {
-            return Swal.fire(
-                "Mensaje de Confirmación",
-                "Bienbenido al sistema",
-                "success"
-            );
+            var data = JSON.parse(resp);
+            if (data[0][5] === "INACTIVO") {
+                return Swal.fire(
+                    "Mensaje de Advertencia",
+                    "Lo sentimos, el usuario " +
+                    usu + " se encuentra supendido, cominiquese con el administrado ",
+                    "warning");
+            }
+            $.ajax({
+                url: "../controlador/usuario/controlador_crear_session.php",
+                type: "POST",
+                data: {
+                    idusuario: data[0][0],
+                    user: data[0][1],
+                    rol: data[0][6]
+                }
+            }).done(function(resp) {
+                let timerInterval
+                Swal.fire({
+                    title: 'BIENVENIDO AL SISTEMA!',
+                    html: 'Usted sera redirigido en <b></b> milisegundos.',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            const content = Swal.getContent()
+                            if (content) {
+                                const b = content.querySelector('b')
+                                if (b) {
+                                    b.textContent = Swal.getTimerLeft()
+                                }
+                            }
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        location.reload()
+                    }
+                })
+            })
         }
     })
 }
