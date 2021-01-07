@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-danger" style="width: 100%;">
+                    <button class="btn btn-danger" style="width: 100%;" onclick="AbrirModalRegistro()">
                         <i class="fa fa-plus"> Nuevo Registro</i>
                     </button>
                 </div>
@@ -56,8 +56,61 @@
     </div>
     <!-- /.card -->
 </div>
+<form autocomplete="false" onsubmit="return false">
+    <div class="modal fade" id="modal_registro" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><b>Registro de Usuario</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" class="form-control" id="txt_usu" placeholder="Ingrese el usuario"
+                            name="usuario">
+                    </div><br>
+                    <div class="col-lg-12">
+                        <label for="password">Contrase&ntilde;a</label>
+                        <input type="password" class="form-control" id="txt_con1" placeholder="Ingrese la contraseña"
+                            name="password">
+                    </div><br>
+                    <div class="col-lg-12">
+                        <label for="password">Repita la Contrase&ntilde;a</label>
+                        <input type="password" class="form-control" id="txt_con2" placeholder="repita la contraseña"
+                            name="password">
+                    </div><br>
+                    <div class="col-lg-12">
+                        <label for="password">Sexo</label>
+                        <select class="js-example-basic-single" name="state" id="cbm_rol" style="width: 100%;">
+                            <option value="M">MASCULINO</option>
+                            <option value="F">FEMENINO</option>
+                        </select>
+                    </div><br>
+                    <div class="col-lg-12">
+                        <label for="password">Rol</label>
+                        <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width: 100%;">
+                        </select>
+                    </div><br>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success">Registrar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <script>
 $(document).ready(function() {
     listar_usuario()
+    $('.js-example-basic-single').select2();
+    listar_combo_rol()
+    $("#modal_registro").on('shown.bs.modal', function() {
+        $("#txt_usu").focus()
+    })
 });
 </script>

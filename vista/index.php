@@ -39,6 +39,9 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <link rel="stylesheet" href="../Plantilla/plugins/sweetalert2/sweetalert2.min.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../Plantilla/plugins/DataTables/datatables.min.css">
+
+    <link rel="stylesheet" href="../Plantilla/plugins/select2/css/select2.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -62,7 +65,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                        aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -147,7 +151,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                                 <a href="#" class="btn btn-default btn-sm float-left">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="../controlador/usuario/controlador_cerrar_session.php" class="btn btn-default btn-sm float-right">Salir</a>
+                                <a href="../controlador/usuario/controlador_cerrar_session.php"
+                                    class="btn btn-default btn-sm float-right">Salir</a>
                             </div>
                         </li>
                     </ul>
@@ -175,7 +180,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
-            <img src="../Plantilla/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="../Plantilla/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
 
@@ -193,11 +199,13 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
-                        <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link active">
+                        <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')"
+                            class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 USUARIO
@@ -722,7 +730,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                             <h3 class="card-title">BIENVENIDO AL CONTENIDO PRINCIPAL</h3>
 
                             <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i>
                                 </button>
                             </div>
                             <!-- /.card-tools -->
@@ -765,39 +774,39 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <script src="../Plantilla/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        var idioma_espanol = {
-            select: {
-                rows: "%d fila seleccionada"
-            },
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningun dato disponible en esta tabla",
-            "sInfo": "Registros del (_START_  al _END_) total de  _TOTAL_ registros",
-            "sInfoEmpty": "Registrol  del (0 al 0) total de 0 registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ Registrado)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar:",
-            "sUrl": "",
-            "sInfoThousands": ",",
-            "sLoadingRecords": "<b>No se encontraron datos</b>",
-            "oPaginate": {
-                "sFirst": "Primero",
-                "sLast": "Ultimo",
-                "sNext": "Siguiente",
-                "sPrevious": "Anterrior"
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para orernar la columna de manera ascendente",
-                "sSortDescending": ": Activar para orernar la columna de manera descendente"
-            }
+    var idioma_espanol = {
+        select: {
+            rows: "%d fila seleccionada"
+        },
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar _MENU_ registros",
+        "sZeroRecords": "No se encontraron resultados",
+        "sEmptyTable": "Ningun dato disponible en esta tabla",
+        "sInfo": "Registros del (_START_  al _END_) total de  _TOTAL_ registros",
+        "sInfoEmpty": "Registrol  del (0 al 0) total de 0 registros",
+        "sInfoFiltered": "(filtrado de un total de _MAX_ Registrado)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sUrl": "",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "<b>No se encontraron datos</b>",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Ultimo",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterrior"
+        },
+        "oAria": {
+            "sSortAscending": ": Activar para orernar la columna de manera ascendente",
+            "sSortDescending": ": Activar para orernar la columna de manera descendente"
         }
+    }
 
 
-        function cargar_contenido(contenedor, contenido) {
-            $("#" + contenedor).load(contenido);
-        }
-        $.widget.bridge('uibutton', $.ui.button)
+    function cargar_contenido(contenedor, contenido) {
+        $("#" + contenedor).load(contenido);
+    }
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="../Plantilla/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -826,6 +835,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <script src="../Plantilla/dist/js/demo.js"></script>
 
     <script src="../Plantilla/plugins/DataTables/datatables.min.js"></script>
+
+    <script src="../Plantilla/plugins/select2/js/select2.min.js"></script>
 </body>
 
 </html>

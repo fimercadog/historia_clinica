@@ -36,4 +36,17 @@ class Modelo_Usuario
             $this->conexion->cerrar();
         }
     }
+
+    function listar_combo_rol()
+    {
+        $sql = "call SP_LISTAR_COMBO_ROL()";
+        $arreglo = array();
+        if ($consulta = $this->conexion->conexion->query($sql)) {
+            while ($consulta_VU = mysqli_fetch_array($consulta)) {
+                $arreglo[] = $consulta_VU;
+            }
+            return $arreglo;
+            $this->conexion->cerrar();
+        }
+    }
 }
