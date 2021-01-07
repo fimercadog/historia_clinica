@@ -68,3 +68,65 @@ function VerificarUsuario() {
         }
     })
 }
+
+function listar_usuario() {
+    var table = $("#tabla_usuario").DataTable({
+        "ordering": false,
+        "paging": false,
+        "searching": { "regex": true },
+        "lengthMenu": [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "All"]
+        ],
+        "pageLength": 10,
+        "destroy": true,
+        "async": false,
+        "processing": true,
+        "ajax": {
+            "url": "../controlador/usuario/controlador_usuario_listar.php",
+            type: 'POST'
+        },
+        "columns": [
+            { "data": "posicion" },
+            { "data": "usu_nombre" },
+            { "data": "rol_nombre" },
+            {
+                "data": "usu_sexo",
+                render: function(data, type, row) {
+                    if (data == 'M') {
+                        return "MASCULINO";
+                    } else {
+                        return "FEMENINO";
+                    }
+                }
+            },
+            {
+                "data": "usu_estatus",
+                render: function(data, type, row) {
+                    if (data == 'ACTIVO') {
+                        return "<span class='badge badge-success'>" + data + "</span>";
+                    } else {
+                        return "<span class='badge badge-danger'>" + data + "</span>";
+                    }
+                }
+            },
+            { "defaultContent": "<button style='font-size:13px;' type='button' class='editar btn btn-primary'> <i class='fa fa-edit'></i> </button>" }
+        ],
+
+        "language": idioma_espanol,
+        select: true
+    });
+    document.getElementById("tabla_usuario_filter").style.display = 'none'
+    $('input.global_filter').on('keyup click', function() {
+        filterGlobal();
+    });
+    $('input.column_filter').on('keyup click', function() {
+        filterColumn($(this).parents('tr').attr('data-column'));
+    });
+}
+
+function filterGlobal() {
+    $('#tabla_usuario').DataTable().search(
+        $('#global_filter').val(),
+    ).draw();
+}
