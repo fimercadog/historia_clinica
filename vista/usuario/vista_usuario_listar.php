@@ -82,21 +82,21 @@
                     </div><br>
                     <div class="col-lg-12">
                         <label for="password">Sexo</label>
-                        <select class="js-example-basic-single" name="state" id="cbm_rol" style="width: 100%;">
+                        <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width: 100%;">
                             <option value="M">MASCULINO</option>
                             <option value="F">FEMENINO</option>
                         </select>
                     </div><br>
                     <div class="col-lg-12">
                         <label for="password">Rol</label>
-                        <select class="js-example-basic-single" name="state" id="cbm_sexo" style="width: 100%;">
+                        <select class="js-example-basic-single" name="state" id="cbm_rol" style="width: 100%;">
                         </select>
                     </div><br>
 
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success">Registrar</button>
+                    <button class="btn btn-success" onclick="Registrar_Usuario()">Registrar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>

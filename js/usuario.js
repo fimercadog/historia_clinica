@@ -1,3 +1,5 @@
+debugger;
+
 function VerificarUsuario() {
     var usu = $("#txt_usu").val();
     var con = $("#txt_con").val();
@@ -68,9 +70,10 @@ function VerificarUsuario() {
         }
     })
 }
+var table
 
 function listar_usuario() {
-    var table = $("#tabla_usuario").DataTable({
+    table = $("#tabla_usuario").DataTable({
         "ordering": false,
         "paging": false,
         "searching": { "regex": true },
@@ -150,11 +153,65 @@ function listar_combo_rol() {
             }
             $("#cbm_rol").html(cadena)
         } else {
-            cadena += "<option value=''>no se enccontraron registros</option>";
+            cadena += "<option value=''>no se encontraron registros</option>";
         }
     })
 }
 
 function Registrar_Usuario() {
+    var usu = $("#txt_usu").val()
+    var contra = $("#txt_con1").val()
+    var contra2 = $("#txt_con2").val()
+    var sexo = $("#cbm_sexo").val()
+    var rol = $("#cbm_rol").val()
 
+    if (usu.length == 0 || contra.length == 0 || contra2.length == 0 || sexo.length == 0 || rol.length == 0) {
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos vacios", "warning");
+    }
+
+    if (contra != contra2) {
+        return Swal.fire("Mensaje de Advertencia", "las contraseñas deben coincidir", "warning");
+    }
+
+    $.ajax({
+        url: "../controlador/usuario/controlador_usuario_registro.php",
+        type: "POST",
+        data: {
+            usuario: usu,
+            contrasena: contra,
+            sexo: sexo,
+            rol: rol
+        }
+    }).done(function(resp) {
+        alert(resp)
+        if (resp > 0) {
+            if (resp == 1) {
+                $("#modal_registro").modal('hide')
+                Swal.fire("Mensaje de Confirmacion", "Datos correctamente diligenciados, Nuevo usaurio registrado", "success").then((value) => {
+                    LimparRegistro()
+                    table.ajax.reload()
+                })
+            } else {
+                Swal.fire(
+                    "Mensaje de Advertencia",
+                    "Lo sentimos, el nombre del usuario ya esta en nuestra base de datos ",
+                    "warning"
+                );
+            }
+        } else {
+            Swal.fire(
+                "Mensaje de Error",
+                "Lo sentimos, no se pudo completar el registro ",
+                "error"
+            );
+        }
+    })
+
+
+}
+
+function LimparRegistro() {
+    $('#txt_usu').val();
+    $('#txt_con1').val();
+    $('#txt_con2').val();
 }
