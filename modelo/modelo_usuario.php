@@ -50,6 +50,16 @@ class Modelo_Usuario
         }
     }
 
+    function Modificar_Estatus_Usuario($idusuario, $estatus)
+    {
+        $sql = "call SP_MODIFICADOR_ESTATUS_USUARIO('$idusuario', '$estatus')";
+        if ($consulta = $this->conexion->conexion->query($sql)) {            // $id_retornado=mysqli_insert_ind($this->conexion->conexion);
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 
     function Registrar_Usuario($usuario, $contra, $sexo, $rol)
     {

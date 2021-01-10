@@ -43,6 +43,14 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <link rel="stylesheet" href="../Plantilla/plugins/select2/css/select2.min.css">
 
 </head>
+<style>
+.swal2-popup {
+    /* TODO: HACER QUE DETECTE EL VIEWPORT  */
+    font-size: 1.6rem !important;
+}
+</style>
+
+<!-- TODO: REVISAR EL CODIGO RESPONSIVE -->
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">

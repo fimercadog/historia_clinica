@@ -1,5 +1,3 @@
-debugger;
-
 function VerificarUsuario() {
     var usu = $("#txt_usu").val();
     var con = $("#txt_con").val();
@@ -113,7 +111,7 @@ function listar_usuario() {
                     }
                 }
             },
-            { "defaultContent": "<button style='font-size:13px;' type='button' class='editar btn btn-primary'> <i class='fa fa-edit'></i> </button>" }
+            { "defaultContent": "<button style='font-size:13px;' type='button' class='desactivar btn btn-dark'> <i class='fa fa-trash'></i> </button> &nbsp; <button style='font-size:13px;' type='button' class='activar btn btn-success'> <i class='fa fa-check'></i> </button>" }
         ],
 
         "language": idioma_espanol,
@@ -126,7 +124,86 @@ function listar_usuario() {
     $('input.column_filter').on('keyup click', function() {
         filterColumn($(this).parents('tr').attr('data-column'));
     });
+
 }
+
+$('#tabla_usuario').on('click', '.activar', function() {
+    var data = table.row($(this).parents('tr')).data()
+        // alert(data.usu_id)
+    if (table.row(this).child.isShown()) {
+        var data = table.row(this);
+    }
+    Swal.fire({
+        title: 'Esta seguro de activar el usuario?',
+        text: "Una vez hecho esto, el usuario  tendra acesso al Sistema!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+        if (result.value) {
+            Modificar_Estatus(data.usu_id, 'ACTIVO')
+            Swal.fire(
+                'Activado!',
+                'Su registro fue activado.',
+                'success'
+            )
+        }
+    })
+})
+
+$('#tabla_usuario').on('click', '.desactivar', function() {
+    var data = table.row($(this).parents('tr')).data()
+        // alert(data.usu_id)
+    if (table.row(this).child.isShown()) {
+        var data = table.row(this);
+    }
+    Swal.fire({
+        title: 'Esta seguro de desactivar el usuario?',
+        text: "Una vez hecho esto, el usuario n tendra acesso al Sistema!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, Eliminar!'
+    }).then((result) => {
+        if (result.value) {
+            Modificar_Estatus(data.usu_id, 'INACTIVO')
+            Swal.fire(
+                'Eliminado!',
+                'Su registro fue eliminado.',
+                'success'
+            )
+        }
+    })
+})
+
+function Modificar_Estatus(idusuario, estatus) {
+    var mensaje = '';
+    if (estatus == 'INACTIVO') {
+        mensaje = 'desactivo';
+    } else {
+        mensaje = 'activo';
+    }
+    $.ajax({
+        url: "../controlador/usuario/controlador_modificar_estatus_usuario.php",
+        type: "POST",
+        data: {
+            idusuario: idusuario,
+            estatus: estatus
+        }
+    }).done(function(resp) {
+        alert(resp)
+        if (resp > 0) {
+            Swal.fire("Mensaje de Confirmacion", "el usuario se " + mensaje + " con exito", "success")
+                .then((value) => {
+                    table.ajax.reload()
+                })
+        }
+    })
+}
+
 
 function filterGlobal() {
     $('#tabla_usuario').DataTable().search(
@@ -183,7 +260,6 @@ function Registrar_Usuario() {
             rol: rol
         }
     }).done(function(resp) {
-        alert(resp)
         if (resp > 0) {
             if (resp == 1) {
                 $("#modal_registro").modal('hide')

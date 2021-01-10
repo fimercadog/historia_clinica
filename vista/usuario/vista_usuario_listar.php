@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-danger" style="width: 100%;" onclick="AbrirModalRegistro()">
+                    <button class="btn btn-success" style="width: 100%;" onclick="AbrirModalRegistro()">
                         <i class="fa fa-plus"> Nuevo Registro</i>
                     </button>
                 </div>
@@ -96,8 +96,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" onclick="Registrar_Usuario()">Registrar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-success" onclick="Registrar_Usuario()"><i class="fa fa-check">
+                            <b>Registrar</b></i></button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa  fa-asterisk">
+                            <b>Cerrar</b></i></button>
                 </div>
             </div>
         </div>
