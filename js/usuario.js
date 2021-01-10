@@ -111,7 +111,7 @@ function listar_usuario() {
                     }
                 }
             },
-            { "defaultContent": "<button style='font-size:13px;' type='button' class='desactivar btn btn-dark'> <i class='fa fa-trash'></i> </button> &nbsp; <button style='font-size:13px;' type='button' class='activar btn btn-success'> <i class='fa fa-check'></i> </button>" }
+            { "defaultContent": "<button style='font-size:13px;' type='button' class='editar btn btn-primary'> <i class='fa fa-edit'></i> </button> &nbsp; <button style='font-size:13px;' type='button' class='desactivar btn btn-dark'> <i class='fa fa-trash'></i> </button> &nbsp; <button style='font-size:13px;' type='button' class='activar btn btn-success'> <i class='fa fa-check'></i> </button>" }
         ],
 
         "language": idioma_espanol,
@@ -179,6 +179,22 @@ $('#tabla_usuario').on('click', '.desactivar', function() {
     })
 })
 
+$('#tabla_usuario').on('click', '.editar', function() {
+    var data = table.row($(this).parents('tr')).data()
+        // alert(data.usu_id)
+    if (table.row(this).child.isShown()) {
+        var data = table.row(this);
+    }
+    $("#modal_editar").modal({ backdrop: 'static', keyboard: false })
+    $("#modal_editar").modal('show')
+    $('#txtidusaurio').val(data.usu_id);
+    $('#txtusu_editar').val(data.usu_nombre);
+    $('#cbm_sexo_editar').val(data.usu_sexo).trigger("change");
+    $('#cbm_rol_editar').val(data.rol_id).trigger("change");
+
+})
+
+
 function Modificar_Estatus(idusuario, estatus) {
     var mensaje = '';
     if (estatus == 'INACTIVO') {
@@ -229,8 +245,11 @@ function listar_combo_rol() {
 
             }
             $("#cbm_rol").html(cadena)
+            $("#cbm_rol_editar").html(cadena)
         } else {
             cadena += "<option value=''>no se encontraron registros</option>";
+            $("#cbm_rol").html(cadena)
+            $("#cbm_rol_editar").html(cadena)
         }
     })
 }
@@ -285,6 +304,42 @@ function Registrar_Usuario() {
 
 
 }
+
+function Modificar_Usuario() {
+    var idusuario = $("#txtidusaurio").val()
+    var sexo = $("#cbm_sexo_editar").val()
+    var rol = $("#cbm_rol_editar").val()
+
+    if (idusuario.length == 0 || sexo.length == 0 || rol.length == 0) {
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos vacios", "warning");
+    }
+
+    $.ajax({
+        url: "../controlador/usuario/controlador_usuario_modificar.php",
+        type: "POST",
+        data: {
+            idusuario: idusuario,
+            sexo: sexo,
+            rol: rol
+        }
+    }).done(function(resp) {
+        if (resp > 0) {
+            $("#modal_editar").modal('hide')
+            Swal.fire("Mensaje de Confirmacion", "Datos correctamente actualizados", "success").then((value) => {
+                table.ajax.reload()
+            })
+        } else {
+            Swal.fire(
+                "Mensaje de Error",
+                "Lo sentimos, no se pudo completar la actualizacion ",
+                "error"
+            );
+        }
+    })
+
+
+}
+
 
 function LimparRegistro() {
     $('#txt_usu').val();
