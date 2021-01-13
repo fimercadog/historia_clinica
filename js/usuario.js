@@ -324,9 +324,10 @@ function Modificar_Usuario() {
         }
     }).done(function(resp) {
         if (resp > 0) {
+            TraerDatosUsuario();
             $("#modal_editar").modal('hide')
             Swal.fire("Mensaje de Confirmacion", "Datos correctamente actualizados", "success").then((value) => {
-                table.ajax.reload()
+                table.ajax.reload();
             })
         } else {
             Swal.fire(
@@ -345,4 +346,30 @@ function LimparRegistro() {
     $('#txt_usu').val();
     $('#txt_con1').val();
     $('#txt_con2').val();
+}
+
+function TraerDatosUsuario() {
+    var usuario = $('#usuarioprincipal').val();
+    $.ajax({
+        'url': "../controlador/usuario/controlador_traerdatos_usuario.php",
+        type: "POST",
+        data: {
+            usuario: usuario
+        }
+    }).done(function(resp) {
+        var data = JSON.parse(resp)
+        if (data.length > 0) {
+            if (data[0][3] == "M") {
+                $("#img_nav").attr("src", "../Plantilla/dist/img/avatar5.png");
+                $("#img_subnav").attr("src", "../Plantilla/dist/img/avatar5.png");
+                $("#img_lateral").attr("src", "../Plantilla/dist/img/avatar5.png");
+            } else {
+                $("#img_nav").attr("src", "../Plantilla/dist/img/avatar3.png");
+                $("#img_subnav").attr("src", "../Plantilla/dist/img/avatar3.png");
+                $("#img_lateral").attr("src", "../Plantilla/dist/img/avatar3.png");
+
+            }
+
+        }
+    })
 }

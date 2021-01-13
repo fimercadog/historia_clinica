@@ -24,6 +24,20 @@ class Modelo_Usuario
         }
     }
 
+
+    function TraerDatos($usuario)
+    {
+        $sql = "call SP_VERIFICAR_USUARIO('$usuario')";
+        $arreglo = array();
+        if ($consulta = $this->conexion->conexion->query($sql)) {
+            while ($consulta_VU = mysqli_fetch_array($consulta)) {
+                $arreglo[] = $consulta_VU;
+            }
+            return $arreglo;
+            $this->conexion->cerrar();
+        }
+    }
+
     function Listar_Usuario()
     {
         $sql = "call SP_LISTAR_USUARIO()";

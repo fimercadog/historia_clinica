@@ -125,51 +125,39 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
                 <li class="dropdown user user-menu open">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                        <img src="../Plantilla/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <img id="img_nav" class="user-image" alt="User Image">
                         <span class="hidden-xs"> <?php echo $_SESSION['S_USER']; ?> </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../Plantilla/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img id="img_subnav" class="img-circle" alt="User Image">
 
                             <p>
                                 <?php echo $_SESSION['S_USER']; ?> - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center ml-auto">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-sm float-left">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="../controlador/usuario/controlador_cerrar_session.php"
-                                    class="btn btn-default btn-sm float-right">Salir</a>
-                            </div>
-                        </li>
-                    </ul>
+
+                        <!-- /.row -->
                 </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                    <div class="pull-left">
+                        <a href="#" class="btn btn-default btn-sm float-left">configurar cuenta</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="../controlador/usuario/controlador_cerrar_session.php"
+                            class="btn btn-default btn-sm float-right">Salir</a>
+                    </div>
+                </li>
+            </ul>
+            </li>
 
-                <!-- /.card -->
+            <!-- /.card -->
 
 
-                <!-- /.card -->
+            <!-- /.card -->
     </div>
 
 
@@ -198,7 +186,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="../Plantilla/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img id="img_lateral" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block"> <?php echo $_SESSION['S_USER']; ?> </a>
@@ -235,14 +223,15 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
         <!-- Main content -->
         <section class="content">
+            <input type="text" name="" value="<?php echo $_SESSION['S_IDUSUARIO'] ?>" id="txtidiprincipal" hidden>
+            <input type="text" name="" value="<?php echo $_SESSION['S_USER'] ?>" id="usuarioprincipal" hidden>
             <div class="row" id="contenido_principal">
-
                 <div class="col-md-12">
-                    <div class="card card-warning">
-                        <div class="card-header">
+                    <div class="card card-warning box-solid">
+                        <div class="card-header with-border">
                             <h3 class="card-title">BIENVENIDO AL CONTENIDO PRINCIPAL</h3>
 
-                            <div class="card-tools">
+                            <div class="card-tools pull-right">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i>
                                 </button>
@@ -350,6 +339,11 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <script src="../Plantilla/plugins/DataTables/datatables.min.js"></script>
 
     <script src="../Plantilla/plugins/select2/js/select2.min.js"></script>
+
+    <script src="../js/usuario.js"></script>
+    <script>
+    TraerDatosUsuario()
+    </script>
 </body>
 
 </html>
