@@ -44,10 +44,10 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
 </head>
 <style>
-.swal2-popup {
-    /* TODO: HACER QUE DETECTE EL VIEWPORT  */
-    font-size: 1.6rem !important;
-}
+    .swal2-popup {
+        /* TODO: HACER QUE DETECTE EL VIEWPORT  */
+        font-size: 1.6rem !important;
+    }
 </style>
 
 <!-- TODO: REVISAR EL CODIGO RESPONSIVE -->
@@ -73,8 +73,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -148,8 +147,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                             contraseña</a>
                     </div>
                     <div class="pull-right">
-                        <a href="../controlador/usuario/controlador_cerrar_session.php"
-                            class="btn btn-default btn-sm float-right">Salir</a>
+                        <a href="../controlador/usuario/controlador_cerrar_session.php" class="btn btn-default btn-sm float-right">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -177,8 +175,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index.php" class="brand-link">
-            <img src="../Plantilla/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="../Plantilla/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
 
@@ -196,13 +193,11 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
-                        <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')"
-                            class="nav-link active">
+                        <a onclick="cargar_contenido('contenido_principal','usuario/vista_usuario_listar.php')" class="nav-link active">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 USUARIO
@@ -233,8 +228,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                             <h3 class="card-title">BIENVENIDO AL CONTENIDO PRINCIPAL</h3>
 
                             <div class="card-tools pull-right">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                        class="fas fa-minus"></i>
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                 </button>
                             </div>
                             <!-- /.card-tools -->
@@ -283,20 +277,17 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                         <div class="col-lg-12">
                             <input type="text" id="txtcontra_bd">
                             <label for="usuario">Contraseña actual</label>
-                            <input type="password" class="form-control" id="txtcontraactual_editar"
-                                placeholder="Contraseña actual">
+                            <input type="password" class="form-control" id="txtcontraactual_editar" placeholder="Contraseña actual">
                         </div>
 
                         <div class="col-lg-12">
                             <label for="usuario">nueva Contraseña</label>
-                            <input type="text" class="form-control" id="txtcontranu_editar"
-                                placeholder="nueva Contraseña ">
+                            <input type="text" class="form-control" id="txtcontranu_editar" placeholder="nueva Contraseña ">
                         </div>
 
                         <div class="col-lg-12">
                             <label for="usuario">repetir Contraseña</label>
-                            <input type="text" class="form-control" id="txtcontrare_editar"
-                                placeholder="repetir Contraseña ">
+                            <input type="text" class="form-control" id="txtcontrare_editar" placeholder="repetir Contraseña ">
                         </div>
 
                         <div class="modal-footer">
@@ -318,39 +309,39 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <script src="../Plantilla/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    var idioma_espanol = {
-        select: {
-            rows: "%d fila seleccionada"
-        },
-        "sProcessing": "Procesando...",
-        "sLengthMenu": "Mostrar _MENU_ registros",
-        "sZeroRecords": "No se encontraron resultados",
-        "sEmptyTable": "Ningun dato disponible en esta tabla",
-        "sInfo": "Registros del (_START_  al _END_) total de  _TOTAL_ registros",
-        "sInfoEmpty": "Registrol  del (0 al 0) total de 0 registros",
-        "sInfoFiltered": "(filtrado de un total de _MAX_ Registrado)",
-        "sInfoPostFix": "",
-        "sSearch": "Buscar:",
-        "sUrl": "",
-        "sInfoThousands": ",",
-        "sLoadingRecords": "<b>No se encontraron datos</b>",
-        "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Ultimo",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterrior"
-        },
-        "oAria": {
-            "sSortAscending": ": Activar para orernar la columna de manera ascendente",
-            "sSortDescending": ": Activar para orernar la columna de manera descendente"
+        var idioma_espanol = {
+            select: {
+                rows: "%d fila seleccionada"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningun dato disponible en esta tabla",
+            "sInfo": "Registros del (_START_  al _END_) total de  _TOTAL_ registros",
+            "sInfoEmpty": "Registrol  del (0 al 0) total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ Registrado)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "<b>No se encontraron datos</b>",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Ultimo",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterrior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para orernar la columna de manera ascendente",
+                "sSortDescending": ": Activar para orernar la columna de manera descendente"
+            }
         }
-    }
 
 
-    function cargar_contenido(contenedor, contenido) {
-        $("#" + contenedor).load(contenido);
-    }
-    $.widget.bridge('uibutton', $.ui.button)
+        function cargar_contenido(contenedor, contenido) {
+            $("#" + contenedor).load(contenido);
+        }
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="../Plantilla/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -384,7 +375,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
     <script src="../js/usuario.js"></script>
     <script>
-    TraerDatosUsuario()
+        TraerDatosUsuario()
     </script>
 </body>
 

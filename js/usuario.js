@@ -441,3 +441,54 @@ function LimpiarEditarContra() {
     $("#txtcontranu_editar").val("");
     $("#txtcontrare_editar").val("");
 }
+
+
+function AbrirModalRestablecer() {
+    $("#modal_restablecer_contra").modal({ backdrop: 'static', keyboard: false })
+    $("#modal_restablecer_contra").modal('show')
+    $("#modal_restablecer_contra").on('shown.bs.modal', function() {
+        $("#txt_email").focus()
+    })
+}
+
+function Restablecer_contra() {
+    var email = $('#txt_email').val();
+    if (email.length == 0) {
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos", "warning");
+    }
+    var caracteres = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ23456789";
+    var contrasena = "";
+    for (let i = 0; i < 6; i++) {
+        contrasena += caracteres.charAt(Math.floor(Math.random() * caracteres.length))
+    }
+    $.ajax({
+        'url': "../controlador/usuario/controlador_restablecer_contra.php",
+        type: "POST",
+        data: {
+            email: email,
+            contrasena: contrasena
+        }
+    }).done(function(resp) {
+        alert(resp);
+        // if (resp > 0) {
+        //     if (resp == 1) {
+        //         $("#modal_editar_contra").modal('hide');
+        //         LimpiarEditarContra();
+        //         Swal.fire("Mensaje de Confirmacion", "Contraseña actualizada correctamente", "success").then((value) => {
+        //             TraerDatosUsuario();
+        //         })
+        //     } else {
+        //         Swal.fire(
+        //             "Mensaje de Error",
+        //             "La contraseña ingresada no concide con al de la bd ",
+        //             "Error");
+        //     }
+
+        // } else {
+        //     return Swal.fire(
+        //         "Mensaje de Error",
+        //         "No se pudo actualizar la cotraseña",
+        //         "Error");
+        // }
+    })
+}
