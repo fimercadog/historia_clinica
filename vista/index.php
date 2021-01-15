@@ -144,7 +144,8 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <div class="pull-left">
-                        <a href="#" class="btn btn-default btn-sm float-left">configurar cuenta</a>
+                        <a href="#" onclick="AbrirModalEditarContra()" class="btn btn-default btn-sm float-left">cambiar
+                            contraseña</a>
                     </div>
                     <div class="pull-right">
                         <a href="../controlador/usuario/controlador_cerrar_session.php"
@@ -223,7 +224,7 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
 
         <!-- Main content -->
         <section class="content">
-            <input type="text" name="" value="<?php echo $_SESSION['S_IDUSUARIO'] ?>" id="txtidiprincipal" hidden>
+            <input type="text" name="" value="<?php echo $_SESSION['S_IDUSUARIO'] ?>" id="txtidprincipal" hidden>
             <input type="text" name="" value="<?php echo $_SESSION['S_USER'] ?>" id="usuarioprincipal" hidden>
             <div class="row" id="contenido_principal">
                 <div class="col-md-12">
@@ -269,6 +270,47 @@ if (!isset($_SESSION['S_IDUSUARIO'])) {
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    <form autocomplete="false" onsubmit="return false">
+        <div class="modal fade" id="modal_editar_contra" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><b>Editar Contraseña</b></h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-lg-12">
+                            <input type="text" id="txtcontra_bd">
+                            <label for="usuario">Contraseña actual</label>
+                            <input type="password" class="form-control" id="txtcontraactual_editar"
+                                placeholder="Contraseña actual">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="usuario">nueva Contraseña</label>
+                            <input type="text" class="form-control" id="txtcontranu_editar"
+                                placeholder="nueva Contraseña ">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="usuario">repetir Contraseña</label>
+                            <input type="text" class="form-control" id="txtcontrare_editar"
+                                placeholder="repetir Contraseña ">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-success" onclick="Editar_Contra()"><i class="fa fa-check">
+                                    <b>Registrar</b></i></button>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa  fa-asterisk">
+                                    <b>Cerrar</b></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
 
     <!-- jQuery -->
     <script src="../Plantilla/plugins/jquery/jquery.min.js"></script>

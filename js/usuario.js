@@ -210,7 +210,6 @@ function Modificar_Estatus(idusuario, estatus) {
             estatus: estatus
         }
     }).done(function(resp) {
-        alert(resp)
         if (resp > 0) {
             Swal.fire("Mensaje de Confirmacion", "el usuario se " + mensaje + " con exito", "success")
                 .then((value) => {
@@ -337,15 +336,13 @@ function Modificar_Usuario() {
             );
         }
     })
-
-
 }
 
 
 function LimparRegistro() {
-    $('#txt_usu').val();
-    $('#txt_con1').val();
-    $('#txt_con2').val();
+    $('#txt_usu').val("");
+    $('#txt_con1').val("");
+    $('#txt_con2').val("");
 }
 
 function TraerDatosUsuario() {
@@ -359,6 +356,7 @@ function TraerDatosUsuario() {
     }).done(function(resp) {
         var data = JSON.parse(resp)
         if (data.length > 0) {
+            $("#txtcontra_bd").val(data[0][2]);
             if (data[0][3] == "M") {
                 $("#img_nav").attr("src", "../Plantilla/dist/img/avatar5.png");
                 $("#img_subnav").attr("src", "../Plantilla/dist/img/avatar5.png");
@@ -372,4 +370,74 @@ function TraerDatosUsuario() {
 
         }
     })
+}
+
+function AbrirModalEditarContra() {
+    $("#modal_editar_contra").modal({ backdrop: 'static', keyboard: false })
+    $("#modal_editar_contra").modal('show')
+    $("#modal_editar_contra").on('shown.bs.modal', function() {
+        $("#txtcontraactual_editar").focus()
+    })
+}
+
+
+function Editar_Contra() {
+    var idusuario = $("#txtidprincipal").val();
+    var contrabd = $("#txtcontra_bd").val();
+    var contraescrita = $("#txtcontraactual_editar").val();
+    var contranu = $("#txtcontranu_editar").val();
+    var contrare = $("#txtcontrare_editar").val();
+    if (contraescrita.length == 0 || contranu.length == 0 || contrare.length == 0) {
+        return Swal.fire(
+            "Mensaje de Advertencia",
+            "Llene los campos vacios",
+            "warning");
+    }
+
+    if (contranu != contrare) {
+        return Swal.fire(
+            "Mensaje de Advertencia",
+            "Las contraseñas deben conincidir",
+            "warning");
+    }
+
+    $.ajax({
+        'url': "../controlador/usuario/controlador_contra_modificar.php",
+        type: "POST",
+        data: {
+            idusuario: idusuario,
+            contrabd: contrabd,
+            contraescrita: contraescrita,
+            contranu: contranu
+        }
+    }).done(function(resp) {
+        alert(resp);
+        if (resp > 0) {
+            if (resp == 1) {
+                $("#modal_editar_contra").modal('hide');
+                LimpiarEditarContra();
+                Swal.fire("Mensaje de Confirmacion", "Contraseña actualizada correctamente", "success").then((value) => {
+                    TraerDatosUsuario();
+                })
+            } else {
+                Swal.fire(
+                    "Mensaje de Error",
+                    "La contraseña ingresada no concide con al de la bd ",
+                    "Error");
+            }
+
+        } else {
+            return Swal.fire(
+                "Mensaje de Error",
+                "No se pudo actualizar la cotraseña",
+                "Error");
+        }
+    })
+}
+
+function LimpiarEditarContra() {
+    $("#txtcontra_bd").val("");
+    $("#txtcontraactual_editar").val("");
+    $("#txtcontranu_editar").val("");
+    $("#txtcontrare_editar").val("");
 }

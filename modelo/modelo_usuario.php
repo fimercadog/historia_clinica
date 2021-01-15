@@ -66,8 +66,19 @@ class Modelo_Usuario
 
     function Modificar_Estatus_Usuario($idusuario, $estatus)
     {
-        $sql = "call SP_MODIFICADOR_ESTATUS_USUARIO('$idusuario', '$estatus')";
-        if ($consulta = $this->conexion->conexion->query($sql)) {            // $id_retornado=mysqli_insert_ind($this->conexion->conexion);
+        $sql = "call SP_MODIFICADOR_CONTRA_USUARIO('$idusuario', '$estatus')";
+        if ($consulta = $this->conexion->conexion->query($sql)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+
+    function Modificar_Contra_Usuario($idusuario, $contranu)
+    {
+        $sql = "call SP_MODIFICADOR_CONTRA_USUARIO('$idusuario', '$contranu')";
+        if ($consulta = $this->conexion->conexion->query($sql)) {
             return 1;
         } else {
             return 0;
