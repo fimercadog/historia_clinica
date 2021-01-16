@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
 
 require '../../modelo/modelo_usuario.php';
 
@@ -20,7 +20,6 @@ if ($consulta == "1") {
     $mail = new PHPMailer(true);
 
     try {
-
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
@@ -30,9 +29,8 @@ if ($consulta == "1") {
         );
 
 
-
         //Server settings
-        $mail->SMTPDebug = 2;                      // Enable verbose debug output
+        $mail->SMTPDebug = 0;                      // Enable verbose debug output
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -42,7 +40,7 @@ if ($consulta == "1") {
         $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
         //Recipients
-        $mail->setFrom('fimercadog@gmail.com', 'Mailer');
+        $mail->setFrom('fimercadog@gmail.com', 'fidelmercado.net');
         $mail->addAddress($email);     // Add a recipient
 
         // Content

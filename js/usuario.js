@@ -14,11 +14,23 @@ function VerificarUsuario() {
         }
     }).done(function(resp) {
         if (resp == 0) {
-            Swal.fire(
-                "Mensaje de Error",
-                "Usuario y/o contrase\u00f1a incorrecta",
-                "error"
-            );
+
+            $.ajax({
+                url: "../controlador/usuario/controlador_intento_modificar.php",
+                type: "POST",
+                data: {
+                    usuario: usu
+                }
+            }).done(function(resp) {
+                if (resp) {
+                    Swal.fire(
+                        "Mensaje de Advertencia",
+                        "Usuario y/o contrase\u00f1a incorrecta, intentos fallidos: " + parseInt(resp) + " -  para poder entrar a su cuenta restablescca su contraseña",
+                        "warning");
+                } else {
+
+                }
+            })
         } else {
             var data = JSON.parse(resp);
             if (data[0][5] === "INACTIVO") {
@@ -26,6 +38,12 @@ function VerificarUsuario() {
                     "Mensaje de Advertencia",
                     "Lo sentimos, el usuario " +
                     usu + " se encuentra supendido, cominiquese con el administrado ",
+                    "warning");
+            }
+            if (data[0][7] == 2) {
+                return Swal.fire(
+                    "Mensaje de Advertencia",
+                    "Lo sentimos, su cuenta actualmente esta bloqueada, para desbloquear restablesca su contraseña ",
                     "warning");
             }
             $.ajax({
@@ -470,25 +488,22 @@ function Restablecer_contra() {
         }
     }).done(function(resp) {
         alert(resp);
-        // if (resp > 0) {
-        //     if (resp == 1) {
-        //         $("#modal_editar_contra").modal('hide');
-        //         LimpiarEditarContra();
-        //         Swal.fire("Mensaje de Confirmacion", "Contraseña actualizada correctamente", "success").then((value) => {
-        //             TraerDatosUsuario();
-        //         })
-        //     } else {
-        //         Swal.fire(
-        //             "Mensaje de Error",
-        //             "La contraseña ingresada no concide con al de la bd ",
-        //             "Error");
-        //     }
+        if (resp > 0) {
+            if (resp == 1) {
+                $("#modal_editar_contra").modal('hide');
+                LimpiarEditarContra();
+                Swal.fire("Mensaje de Confirmacion", "Contraseña se restablecio correctamente" + email + "", "success").then((value) => {
+                    TraerDatosUsuario();
+                })
+            } else {
+                Swal.fire("Mensaje de Advertencia", "el correo ingresado no se encutra en nuestra BD", "warning");
+            }
 
-        // } else {
-        //     return Swal.fire(
-        //         "Mensaje de Error",
-        //         "No se pudo actualizar la cotraseña",
-        //         "Error");
-        // }
+        } else {
+            Swal.fire(
+                "Mensaje de Error",
+                "No se pudo restablecer la contraseña",
+                "Error");
+        }
     })
 }

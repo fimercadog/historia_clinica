@@ -117,4 +117,15 @@ class Modelo_Usuario
             $this->conexion->cerrar();
         }
     }
+
+    function Modificar_Intento_Usuario($usuario)
+    {
+        $sql = "call SP_INTENTO_USUARIO('$usuario')";
+        if ($consulta = $this->conexion->conexion->query($sql)) {
+            if ($row = mysqli_fetch_array($consulta)) {
+                return $id = trim($row[0]);
+            }
+            $this->conexion->cerrar();
+        }
+    }
 }
