@@ -66,7 +66,7 @@ class Modelo_Usuario
 
     function Modificar_Estatus_Usuario($idusuario, $estatus)
     {
-        $sql = "call SP_MODIFICADOR_CONTRA_USUARIO('$idusuario', '$estatus')";
+        $sql = "call SP_MODIFICADOR_ESTATUS_USUARIO('$idusuario', '$estatus')";
         if ($consulta = $this->conexion->conexion->query($sql)) {
             return 1;
         } else {
@@ -85,9 +85,9 @@ class Modelo_Usuario
         }
     }
 
-    function Modificar_Datos_Usuario($idusuario, $sexo, $rol)
+    function Modificar_Datos_Usuario($idusuario, $sexo, $rol, $email)
     {
-        $sql = "call SP_MODIFICADOR_DATOS_USUARIO('$idusuario', '$sexo', '$rol')";
+        $sql = "call SP_MODIFICADOR_DATOS_USUARIO('$idusuario', '$sexo', '$rol','$email')";
         if ($consulta = $this->conexion->conexion->query($sql)) {
             return 1;
         } else {
@@ -96,9 +96,9 @@ class Modelo_Usuario
     }
 
 
-    function Registrar_Usuario($usuario, $contra, $sexo, $rol)
+    function Registrar_Usuario($usuario, $contra, $sexo, $rol, $email)
     {
-        $sql = "call SP_REGISTRAR_USUARIO('$usuario', '$contra', '$sexo', '$rol')";
+        $sql = "call SP_REGISTRAR_USUARIO('$usuario', '$contra', '$sexo', '$rol','$email')";
         if ($consulta = $this->conexion->conexion->query($sql)) {
             if ($row = mysqli_fetch_array($consulta)) {
                 return $id = trim($row[0]);
