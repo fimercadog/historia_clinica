@@ -54,3 +54,42 @@ function listar_procedimiento() {
     });
 
 }
+
+function AbrirModalRegistro() {
+    $("#modal_registro").modal({ backdrop: 'static', keyboard: false })
+    $("#modal_registro").modal('show');
+}
+
+function Registro_Procedimiento() {
+    var procedimiento = $("#txt_procedimiento").val();
+    var estatus = $("#cbm_estatus").val();
+    if (procedimiento.length == 0) {
+        return Swal.fire("Mensaje De Advertencia", "El campo procedimiento debe tener datos", "warning");
+    }
+
+    $.ajax({
+        url: '../controlador/procedimiento/controlador_procedimiento_registro.php',
+        type: 'post',
+        data: {
+            p: procedimiento,
+            e: estatus
+        }
+    }).done(function(resp) {
+        if (resp > 0) {
+            if (resp == 1) {
+                $("#modal_registro").modal('hide');
+                listar_procedimiento();
+                LimpiarDatos();
+                Swal.fire("Mensaje De Confirmacion", "Datos guardados correctamente, procedimiento registrado", "success");
+            } else {
+                LimpiarDatos();
+                Swal.fire("Mensaje De Advertencia", "El procedimiento ya existe en nuestra data", "warning");
+            }
+        }
+    })
+}
+
+
+function LimpiarDatos() {
+    $("#txt_procedimiento").val("");
+}
